@@ -1,0 +1,2 @@
+# splave-ferris
+This is an ultra-low profile version using the new Kailh scissor switches. I haven't figured out how to make an ergogen footprint for it yet, so for now I just started with the Choc v1 pcb files from ergogen and swapped the model in KiCad. They are not close to done...not only have I not done the routing yet, but it looks like the diodes may need to move too, so I think I have some work ahead.

@@ -1,0 +1,351 @@
+units:
+  # Proxy Spacing Variables
+  kx: cx
+  ky: cy
+  # Padding Variables
+  px: kx + 2
+  py: ky + 2
+  $default_height: 17
+  $default_width: 18
+points:
+  zones:
+    hand:
+      anchor.shift: [100,-100]
+      key:
+        padding: 1ky
+        spread: 1kx
+      columns:
+        pinky:
+          key:
+            column_net: D4
+            mirror.column_net: D8
+        ring:
+          key:
+            stagger: 12
+            splay: -6
+            spread: kx+2
+            column_net: D2
+            mirror.column_net: D10
+        middle:
+          key:
+            stagger: 7
+            splay: -3
+            spread: kx+1
+            column_net: D1
+            mirror.column_net: D9
+        index:
+          key:
+            stagger: -4
+            splay: -2
+            spread: kx+0.8
+            column_net: D10
+            mirror.column_net: D3
+        inner:
+          key:
+            stagger: -2
+            splay: -1
+            spread: kx+0.6
+            column_net: D8
+            mirror.column_net: D5
+      rows:
+        bottom:
+          row_net: D5
+          mirror.row_net: D2
+        home:
+          row_net: D3
+          mirror.row_net: D1
+        top:
+          row_net: D0
+          mirror.row_net: D0
+    thumb:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        ref: hand_inner_bottom
+        shift: [-2.5,-20]
+      columns:
+        near:
+          key:
+            splay: -15
+            column_net: D10
+            mirror.column_net: D3
+        far:
+          key:
+            splay: -15
+            shift: [3,-2]
+            column_net: D8
+            mirror.column_net: D5
+      rows:
+        fan:
+          row_net: D9
+          mirror.row_net: D4
+  mirror: &mirror
+    ref: thumb_far_fan
+    distance: 6kx
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [px, py]
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5,ky-0.5]
+  board_left:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: thumb_far_fan
+          shift: [0.6px,-0.6py]
+        - ref: thumb_near_fan
+          shift: [-0.5px,-0.5py]
+        - ref: hand_pinky_bottom
+          shift: [-0.6px,-0.6py]
+        - ref: hand_pinky_top
+          shift: [-0.6px,0.5py]
+        - ref: hand_ring_top
+          shift: [-0.5px,0.5py]
+        - ref: hand_middle_top
+          shift: [-0.5px,0.5py]
+        - ref: hand_middle_top
+          shift: [0.5px,0.5py]
+        - ref: hand_inner_top
+          shift: [0.5px,0.5py]
+        - ref: hand_inner_top
+          shift: [36,0.5py]
+        - ref: hand_inner_bottom
+          shift: [36,-1py]
+      fillet: 8
+  combo:
+    - name: board_left
+    - operation: subtract
+      name: keys
+  board_right:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: mirror_thumb_far_fan
+          shift: [0.6px,-0.6py]
+        - ref: mirror_thumb_near_fan
+          shift: [-0.5px,-0.5py]
+        - ref: mirror_hand_pinky_bottom
+          shift: [-0.6px,-0.6py]
+        - ref: mirror_hand_pinky_top
+          shift: [-0.6px,0.5py]
+        - ref: mirror_hand_ring_top
+          shift: [-0.5px,0.5py]
+        - ref: mirror_hand_middle_top
+          shift: [-0.5px,0.5py]
+        - ref: mirror_hand_middle_top
+          shift: [0.5px,0.5py]
+        - ref: mirror_hand_inner_top
+          shift: [0.5px,0.5py]
+        - ref: mirror_hand_inner_top
+          shift: [36,0.5py]
+        - ref: mirror_hand_inner_bottom
+          shift: [36,-1py]
+      fillet: 8
+  combo_right:
+    - name: board_right
+    - operation: subtract
+      name: keys
+pcbs:
+  splave-ferris_choc_v1_left:
+    outlines:
+      main:
+        outline: board_left
+    footprints:
+      choc_v1:
+        what: switch_choc_v1_v2
+        where: /^hand|^thumb/
+        params:
+          reversible: false
+          hotswap: false
+          solder: true
+          choc_v1_support: true
+          choc_v2_support: false
+          include_choc_v1_led_cutout_marks: true
+          keycap_height: ky
+          keycap_width: kx
+          include_keycap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        #The public web-hosted versions of ergoden don't have the SMD diode
+        #footprint I'm using. So when testing on thos platforms replace with
+        #the standard "diode" footprint.
+        #what: diode
+        what: diode_tht_sod123
+        where: /^hand|^thumb/
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+          #Use back side for hotswap switches
+          #side: B
+          #Front side for direct-solder for SMD manufacturing
+          side: F
+        adjust:
+          shift: [0, -5]
+      #Again the web versions don't have a xiao footprint.
+      #so replace with a promicro when testing there. Note the
+      #pro micro footprint is rotated 90deg vs XIAO
+      #promicro:
+      #    what: promicro
+      #    params:
+      #      orientation: "down"
+      #    where:
+      #      ref: hand_inner_top
+      #      shift: [0,-9]
+      #      rotate: -90
+      #
+      #I adapbed this footprint from one by hand_le by removing the cutouts
+      #and dual-side pads he had.
+      xiao:
+          what: xiao_smd
+          where:
+            ref: hand_inner_top
+            shift: [23,-2.5]
+            rotate: 0
+      reset:
+        what: button
+        params:
+          from: GND
+          to: RST
+        where:
+          ref: hand_inner_home
+          shift: [20,-1.5]
+          rotate: -90
+        #This positioning should work well if you wish to site the battery nearby the controller
+          #ref: hand_inner_home
+          #shift: [23,-1.5]
+          #rotate: 90
+      power:
+        what: slider
+        params:
+          from: BATCON
+          to: BAT
+        where:
+          ref: hand_inner_home
+          shift: [32.5,-1.5]
+          rotate: -90
+      batcon:
+        what: battery_connector_jst_ph_2
+        #Web-hosted ergogen needs a pointer to the footprint.
+        #what: ceoloide/battery_connector_jst_ph_2
+        where:
+          ref: hand_index_bottom
+          shift: [5,-13]
+          rotate: -90
+        params: 
+          BAT_P: "BATCON"
+      #This nice!view screen is a good proxy for a battery
+      #as it is the same dimensions as a 110mah (roughly)
+      #Don't want to leave it active since it creates holes
+      # battery:
+      #   what: display_nice_view
+      #   where:
+      #     ref: hand_middle_bottom
+      #     shift: [-6,-25]
+      #     rotate: -87
+      #   params:
+      #     include_traces: false
+      #     MOSI: ''
+      #     SCK: ''
+      #     VCC: ''
+      #     GND: ''
+      #     CS: ''
+  splave-ferris_choc_v1_right:
+    outlines:
+      main:
+        outline: board_right
+    footprints:
+      choc_v1:
+        what: switch_choc_v1_v2
+        where: /^mirror/
+        params:
+          reversible: false
+          hotswap: false
+          solder: true
+          choc_v1_support: true
+          choc_v2_support: false
+          include_choc_v1_led_cutout_marks: true
+          #If you don't specify these you get an 18mm square keycap drawing. It won't
+          #hurt anything, but it doesn't look right.
+          keycap_height: ky
+          keycap_width: kx
+          include_keycap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        #again, simple diode for web-testing
+        #what: diode
+        what: diode_tht_sod123
+        where: /^mirror/
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+          side: F
+        adjust:
+          shift: [0, -5]
+      #More web-testing
+      #promicro:
+      #    what: promicro
+      #    params:
+      #      orientation: "down"
+      #    where:
+      #      ref: mirror_hand_inner_top
+      #      shift: [0,-9]
+      #      rotate: -90
+      xiao:
+          what: xiao_smd
+          where:
+            ref: mirror_hand_inner_top
+            shift: [23,-2.5]
+            rotate: 0
+      reset:
+        what: button
+        params:
+          from: RST
+          to: GND
+        where:
+          ref: mirror_hand_inner_home
+          shift: [20,-1.5]
+          rotate: -90
+        #Positioning for battery by controller.
+          #ref: hand_inner_home
+          #shift: [23,-1.5]
+          #rotate: 90
+      power:
+        what: slider
+        params:
+          from: BAT
+          to: BATCON
+        where:
+          ref: mirror_hand_inner_home
+          shift: [32.5,-1.5]
+          rotate: -90
+      batcon:
+        what: battery_connector_jst_ph_2
+        #what: ceoloide/battery_connector_jst_ph_2
+        where:
+          ref: mirror_hand_index_bottom
+          shift: [5,-13]
+          rotate: -90
+        params: 
+          BAT_P: "BATCON"
+      #This nice!view screen is a good proxy for a battery
+      #don't want to leave it active since it creates holes
+      # battery:
+      #   what: display_nice_view
+      #   where:
+      #     ref: mirror_hand_middle_bottom
+      #     shift: [-6,-25]
+      #     rotate: -87
+      #   params:
+      #     include_traces: false
+      #     MOSI: ''
+      #     SCK: ''
+      #     VCC: ''
+      #     GND: ''
+      #     CS: ''
