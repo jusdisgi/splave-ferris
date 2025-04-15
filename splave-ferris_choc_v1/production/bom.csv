@@ -1,0 +1,6 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+B1,SW_TACT_ALPS_SKQGABE010,1,,
+"D1, D10, D11, D12, D13, D14, D15, D16, D17, D2, D3, D4, D5, D6, D7, D8, D9",diode_tht_sod123,17,,
+JST1,battery_connector_jst_ph_2,1,,
+MCU1,xiao_smd,1,,
+T1,SPDT_C128955,1,,

@@ -10,7 +10,7 @@ units:
 points:
   zones:
     hand:
-      anchor.shift: [100,-100]
+      anchor.shift: [120,-210]
       key:
         padding: 1ky
         spread: 1kx
