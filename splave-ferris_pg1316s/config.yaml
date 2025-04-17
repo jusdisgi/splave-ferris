@@ -239,7 +239,7 @@ pcbs:
           ref: mirror_thumb_far_fan
           shift: [1,11]
           rotate: -90
-  splave-ferris_pg1316s:
+  splave-ferris_pg1316s_unrouted:
     outlines:
       left:
         outline: board_left

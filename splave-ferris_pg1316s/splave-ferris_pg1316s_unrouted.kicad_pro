@@ -134,7 +134,7 @@
         "min_track_width": 0.2,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.4,
-        "solder_mask_to_copper_clearance": 0.005,
+        "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -231,7 +231,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "splave-ferris_pg1316s_left.kicad_pro",
+    "filename": "splave-ferris_pg1316s_unrouted.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -355,7 +355,43 @@
       },
       {
         "netclass": "Default",
-        "pattern": "D4"
+        "pattern": "mirror_pinky_bottom"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_pinky_home"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_pinky_top"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_ring_bottom"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_ring_home"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_ring_top"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "D9"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_middle_bottom"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_middle_home"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_middle_top"
       },
       {
         "netclass": "Default",
@@ -363,11 +399,43 @@
       },
       {
         "netclass": "Default",
-        "pattern": "D0"
+        "pattern": "mirror_index_bottom"
       },
       {
         "netclass": "Default",
-        "pattern": "D9"
+        "pattern": "mirror_index_home"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_index_top"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_inner_bottom"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_inner_home"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_inner_top"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_near_fan"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "mirror_far_fan"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "D4"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "D0"
       },
       {
         "netclass": "Default",

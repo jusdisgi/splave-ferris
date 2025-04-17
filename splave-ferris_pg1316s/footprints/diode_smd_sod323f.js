@@ -34,8 +34,8 @@ fp.push(`(property "Reference" "${p.ref}" ${p.ref_hide} (at 0 0 ${p.r}) (layer "
 
 
 // Pads
-fp.push(`(pad "1" smd roundrect (at ${(flip ? 1.1 : -1.1)} 0 ${p.r}) (size 0.5 0.5) (layers "${(flip ? "B" : "F")}.Cu" "${(flip ? "B" : "F")}.Mask" "${(flip ? "B" : "F")}.Paste") (roundrect_rratio 0.25) ${p.from})`);
-fp.push(`(pad "2" smd roundrect (at ${(flip ? -1.1 : 1.1)} 0 ${p.r}) (size 0.5 0.5) (layers "${(flip ? "B" : "F")}.Cu" "${(flip ? "B" : "F")}.Mask" "${(flip ? "B" : "F")}.Paste") (roundrect_rratio 0.25) ${p.to})`);
+fp.push(`(pad "1" smd roundrect (at ${(flip ? 1.1 : -1.1)} 0 ${p.r}) (size 0.5 0.5) (layers "${(flip ? "B" : "F")}.Cu" "${(flip ? "B" : "F")}.Mask" "${(flip ? "B" : "F")}.Paste") (roundrect_rratio 0.25) ${p.to})`);
+fp.push(`(pad "2" smd roundrect (at ${(flip ? -1.1 : 1.1)} 0 ${p.r}) (size 0.5 0.5) (layers "${(flip ? "B" : "F")}.Cu" "${(flip ? "B" : "F")}.Mask" "${(flip ? "B" : "F")}.Paste") (roundrect_rratio 0.25) ${p.from})`);
 
 // F.SilkS
 fp.push(`(fp_line (start ${(flip ? 1.61 : -1.61)} -0.85) (end ${(flip ? 1.61 : -1.61)} 0.85) (stroke (width 0.12) (type solid)) (layer ${(flip ? "B.SilkS" : "F.SilkS")}))`);
