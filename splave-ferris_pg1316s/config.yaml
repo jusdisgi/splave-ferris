@@ -1,6 +1,6 @@
 units:
   # Proxy Spacing Variables
-  # PG1316S keycaps are smaller than chocs.
+  # PG1316S keycaps are smaller than chocs...
   # These dimensions come from: https://docs.holykeebs.com/datasheets/PG1316_1U.pdf
   kx: 16
   ky: 16
