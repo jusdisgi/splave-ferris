@@ -1,3 +1,9 @@
+// Ergogen footprint for Kailh PG1316S "Ultra Low Profile" keyswitches
+// Created with https://kicad2ergogen.genteure.com
+// Based on https://github.com/mikeholscher/zmk-config-mikefive/blob/main/files/footprint-and-cad/CPG1316S01D02_mikeholscher.kicad_mod
+// Minor modifications by @huntercook
+//
+//
 module.exports = {
   params: {
     designator: 'S',
